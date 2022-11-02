@@ -26,22 +26,25 @@ class snakeAndLadder:
         self.players = []
         self.snakes = {99: 69, 91: 61, 87: 57, 65: 52, 47: 19, 34: 1, 25: 5}
         self.ladders = {69: 98, 63: 95, 3: 51, 36: 55, 20: 70, 6: 27}
+        self.pool = None
 
     def addPlayer(self, player_list):
         # add player object into player list
         for i in player_list:
-            # judge weather it has robot
+            # judge weather it is a robot
             if not i == "":
                 self.players.append(player(i))
             else:
-                self.players.append(player("robot"+"-"+str(datetime.now().time())))
+                robot = player("robot"+"-"+str(datetime.now().time()))
+                robot.is_robot = True
+                self.players.append(robot)
 
         for i in self.players:
             print(i.name)
 
         # define the first player
-        pool = cycle(self.players)
-        self.current_player = pool.__next__()
+        self.pool = cycle(self.players)
+        self.current_player = self.pool.__next__()
 
     def move(self,event):
         self.current_player.dice()
@@ -56,6 +59,7 @@ class snakeAndLadder:
             print("you are now in position {}".format(self.current_player.current_position))
         else:
             return "game is over"
+        self.current_player = self.pool.__next__()
 
 
 
