@@ -21,6 +21,7 @@ class snakeAndLadder:
             self.ladders{} store all ladders into this dict
             self.current_player: store the next player object
         """
+
     def __init__(self):
         self.current_player = None
         self.players = []
@@ -35,7 +36,7 @@ class snakeAndLadder:
             if not i == "":
                 self.players.append(player(i))
             else:
-                robot = player("robot"+"-"+str(datetime.now().time()))
+                robot = player("robot" + "-" + str(datetime.now().time()))
                 robot.is_robot = True
                 self.players.append(robot)
 
@@ -46,20 +47,19 @@ class snakeAndLadder:
         self.pool = cycle(self.players)
         self.current_player = self.pool.__next__()
 
-    def move(self,event):
+    def move(self, event):
+        print("now player {} start dice".format(self.current_player.name))
         self.current_player.dice()
+        print("player {} get value {}".format(self.current_player.name, self.current_player.number))
         self.current_player.current_position += self.current_player.number
         if not self.current_player.isGameEnd():
             # judge if the player trigger the snakes or the ladders
             if self.current_player.current_position in self.snakes.keys():
                 self.current_player.current_position = self.snakes[self.current_player.current_position]
-                print("snakes!!! back to {}".format(self.current_player.current_position))
+                print("snakes!!! player {} back to {}".format(self.current_player.name, self.current_player.current_position))
             if self.current_player.current_position in self.ladders.keys():
-                print("ladders!!! Going to {}".format(self.current_player.current_position))
-            print("you are now in position {}".format(self.current_player.current_position))
+                print("ladders!!! player {} Going to {}".format(self.current_player.name, self.current_player.current_position))
+            print("player {} now in position {}".format(self.current_player.name, self.current_player.current_position))
         else:
             return "game is over"
         self.current_player = self.pool.__next__()
-
-
-
