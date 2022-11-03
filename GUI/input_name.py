@@ -3,6 +3,7 @@ from ttkbootstrap.constants import *
 from PIL import Image, ImageTk
 from Function.snakeAndLadder import *
 from Function.gl import *
+from GUI.game_board import *
 
 
 class snakeAndLadder_bg(ttk.Frame):
@@ -91,7 +92,7 @@ class NameEntryForm(ttk.Frame):
 
     def onStart(self):
         """Cancel and close the application."""
-        snakeAndLadder_bg(self.master)
+        snakeAndLadder_game_board(self.master)
 
 
 if __name__ == "__main__":

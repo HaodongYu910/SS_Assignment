@@ -22,7 +22,6 @@ class player:
 
     def dice(self):
         self.number = random.randint(1, 6)
-        print("you got a number {}".format(self.number))
 
     def isGameEnd(self):
         if self.current_position == 100:
