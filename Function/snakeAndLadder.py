@@ -63,6 +63,7 @@ class snakeAndLadder:
             if self.current_player.current_position in self.ladders.keys():
                 print("ladders!!! player {} Going to {}".format(self.current_player.name, self.current_player.current_position))
             print("player {} now in position {}\n".format(self.current_player.name, self.current_player.current_position))
+            self.current_player = self.pool.__next__()
+            return "game is not over"
         else:
             return "game is over"
-        self.current_player = self.pool.__next__()

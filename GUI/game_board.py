@@ -13,7 +13,7 @@ class snakeAndLadder_game_board(ttk.Frame):
 
         top1 = ttk.Toplevel(master)
         # image = Image.open('D:\Phthon_code\Assignment\map.jpg')
-        bg_image = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_assignment/Image/bg.jpeg',
+        bg_image = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/bg.jpeg',
                                    700,
                                    700)
         img1 = ImageTk.PhotoImage(bg_image)
@@ -21,7 +21,7 @@ class snakeAndLadder_game_board(ttk.Frame):
         bg_canvas.create_image(0, 0, image=img1, anchor="nw")
         bg_canvas.grid(row=1, column=1)
 
-        dice_image1 = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_assignment/Image/1.jpeg', 100,
+        dice_image1 = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/1.jpeg', 100,
                                    100)
         img2 = ImageTk.PhotoImage(dice_image1)
         dice_canvas1 = ttk.Canvas(top1, width=dice_image1.width, height=dice_image1.height, bg='white')
