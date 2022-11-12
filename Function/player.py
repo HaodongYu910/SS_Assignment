@@ -9,7 +9,6 @@ class player:
     """
     function:
         dice(): give a random number between 1 and 6, store number in self.number
-        isGameEnd(): judge if this player reach at position 100, then end the game.
     variable:
         current_position: the current position of this player
     """
