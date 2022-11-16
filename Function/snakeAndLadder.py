@@ -1,12 +1,5 @@
-import random
-import time
 from datetime import datetime
 from itertools import cycle
-from tkinter.ttk import Frame
-
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-
 from Function.player import *
 
 
@@ -68,16 +61,17 @@ class snakeAndLadder:
             # judge if the player trigger the snakes or the ladders
             if self.current_player.current_position in self.snakes.keys():
                 self.current_player.current_position = self.snakes[self.current_player.current_position]
-                print("snakes!!! player {} back to {}".format(self.current_player.name, self.current_player.current_position))
+                print("snakes!!! player {} back to {}".format(self.current_player.name,
+                                                              self.current_player.current_position))
             if self.current_player.current_position in self.ladders.keys():
-                print("ladders!!! player {} Going to {}".format(self.current_player.name, self.current_player.current_position))
-            print("player {} now in position {}\n".format(self.current_player.name, self.current_player.current_position))
+                print("ladders!!! player {} Going to {}".format(self.current_player.name,
+                                                                self.current_player.current_position))
+            print(
+                "player {} now in position {}\n".format(self.current_player.name, self.current_player.current_position))
             self.current_player = self.pool.__next__()
             # judge if the next player is robot.
             if self.current_player.name.split("-")[0] == "robot":
                 self.move()
-
-
 
     def isGameEnd(self):
         if self.current_player.current_position == 100:
@@ -87,7 +81,8 @@ class snakeAndLadder:
         # we must ensure the position is accurately equal to 100
         if self.current_player.current_position >= 100:
             self.current_player.current_position -= self.current_player.current_position
-            print("You roll a dice greater than 100, back to the previous position: {}".format(self.current_player.current_position))
+            print("You roll a dice greater than 100, back to the previous position: {}".format(
+                self.current_player.current_position))
             # game status equals to 0 means game is not ended
             self.game_status = 0
             return False

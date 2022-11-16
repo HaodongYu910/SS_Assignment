@@ -1,8 +1,5 @@
 import random
-from tkinter.ttk import Frame
 
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
 
 
 class player:

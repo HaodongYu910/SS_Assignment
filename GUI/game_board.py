@@ -1,6 +1,5 @@
 from PIL import Image, ImageTk
 import random
-from tkinter.ttk import Frame
 from Function.gl import *
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *

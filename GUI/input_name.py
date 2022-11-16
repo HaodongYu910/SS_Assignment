@@ -1,8 +1,3 @@
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-from PIL import Image, ImageTk
-from Function.snakeAndLadder import *
-from Function.gl import *
 from GUI.game_board import *
 
 
@@ -54,12 +49,15 @@ class NameEntryForm(ttk.Frame):
         container = ttk.Frame(self)
         container.pack(fill=X, expand=YES, pady=5)
 
+        # this player's label
         lbl = ttk.Label(master=container, text=label.title(), width=10)
         lbl.pack(side=LEFT, padx=5)
 
+        # this player's entry
         ent = ttk.Entry(master=container, textvariable=variable)
         ent.pack(side=LEFT, padx=5, fill=X, expand=YES)
 
+        # this player's combobox
         combobox = ttk.Combobox(master=container, textvariable=colour)
         combobox.pack(side=LEFT, padx=5, fill=X, expand=YES)
         combobox['value'] = ('Red', 'Blue', 'Black', 'Grey')

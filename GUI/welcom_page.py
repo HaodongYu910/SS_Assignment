@@ -1,8 +1,3 @@
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-
-from PIL import Image, ImageTk
-
 from GUI.input_name import *
 
 
