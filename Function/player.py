@@ -11,6 +11,8 @@ class player:
         dice(): give a random number between 1 and 6, store number in self.number
     variable:
         current_position: the current position of this player
+        is_robot: if current player is robot, then this come to true
+        colour: player colour
     """
 
     def __init__(self, name):
@@ -18,6 +20,7 @@ class player:
         self.number = 0
         self.current_position = 0
         self.is_robot = False
+        self.colour = ""
 
     def dice(self):
         self.number = random.randint(1, 6)

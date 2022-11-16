@@ -53,8 +53,14 @@ class snakeAndLadder:
         self.pool = cycle(self.players)
         self.current_player = self.pool.__next__()
 
+    def addColour_2_player(self, colour_list):
+        temp = 0
+        for i in self.players:
+            i.colour = colour_list[temp]
+            temp += 1
+
     def move(self):
-        print("now player {} start dice".format(self.current_player.name))
+        print("now player {} with colour {} start dice".format(self.current_player.name, self.current_player.colour))
         self.current_player.dice()
         print("player {} got number {}".format(self.current_player.name, self.current_player.number))
         self.current_player.current_position += self.current_player.number
