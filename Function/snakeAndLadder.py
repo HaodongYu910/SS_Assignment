@@ -23,6 +23,7 @@ class snakeAndLadder:
         self.players = []
         self.snakes = {99: 69, 91: 61, 87: 57, 65: 52, 47: 19, 34: 1, 25: 5}
         self.ladders = {69: 98, 63: 95, 3: 51, 36: 55, 20: 70, 6: 27}
+        # self.ladders = {69: 98, 63: 95, 3: 4, 36: 55, 29: 70, 6: 19}
         self.pool = None
 
     def addPlayer(self, player_list):
@@ -53,42 +54,37 @@ class snakeAndLadder:
             temp += 1
 
     def move(self):
-        print("now player {} with colour {} start dice".format(self.current_player.name, self.current_player.colour))
-        self.current_player.dice()
-        print("player {} got number {}".format(self.current_player.name, self.current_player.number))
         self.current_player.current_position += self.current_player.number
-        if not self.isGameEnd():
-            # judge if the player trigger the snakes or the ladders
-            if self.current_player.current_position in self.snakes.keys():
-                self.current_player.current_position = self.snakes[self.current_player.current_position]
-                print("snakes!!! player {} back to {}".format(self.current_player.name,
-                                                              self.current_player.current_position))
-            if self.current_player.current_position in self.ladders.keys():
-                print("ladders!!! player {} Going to {}".format(self.current_player.name,
-                                                                self.current_player.current_position))
-            print(
-                "player {} now in position {}\n".format(self.current_player.name, self.current_player.current_position))
-            self.current_player = self.pool.__next__()
-            # judge if the next player is robot.
-            if self.current_player.name.split("-")[0] == "robot":
-                self.move()
+        # judge if the player trigger the snakes or the ladders
+        if self.current_player.current_position in self.snakes.keys():
+            self.current_player.current_position = self.snakes[self.current_player.current_position]
+            print("snakes!!! player {} back to {}".format(self.current_player.name,
+                                                          self.current_player.current_position))
+        if self.current_player.current_position in self.ladders.keys():
+            self.current_player.current_position = self.ladders[self.current_player.current_position]
+            print("ladders!!! player {} Going to {}".format(self.current_player.name,
+                                                            self.current_player.current_position))
+        print(
+            "player {} now in position {}".format(self.current_player.name, self.current_player.current_position))
+        # judge if the next player is robot.
 
     def isGameEnd(self):
-        if self.current_player.current_position == 100:
+        end_point = 100
+        if self.current_player.current_position == end_point:
             # game status equals to 1 means game is ended
             self.game_status = 1
             return True
         # we must ensure the position is accurately equal to 100
-        if self.current_player.current_position >= 100:
-            self.current_player.current_position -= self.current_player.current_position
-            print("You roll a dice greater than 100, back to the previous position: {}".format(
+        if self.current_player.current_position >= end_point:
+            self.current_player.current_position -= self.current_player.number
+            print("You roll a dice greater than {}, back to the previous position: {}".format(end_point,
                 self.current_player.current_position))
             # game status equals to 0 means game is not ended
             self.game_status = 0
             return False
         # if current player did not meet the game end request, then conitnue the game
-        if self.current_player.current_position < 100:
-            print("Current player {} did not meet the end, Game contine".format(self.current_player.name))
+        if self.current_player.current_position < end_point:
+            print("Current player {} did not meet the end, Game continue".format(self.current_player.name))
             # game status equals to 0 means game is not ended
             self.game_status = 0
             return False

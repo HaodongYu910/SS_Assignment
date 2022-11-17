@@ -28,12 +28,30 @@ class snakeAndLadder_game_board(ttk.Frame):
         b_roll = ttk.Button(
             top1,
             text='Roll',
-            command=game.move,
+            command=self.player_move,
             width=10,
             bootstyle="success")
         b_roll.grid(row=1, column=2, pady=20, sticky=S)
 
         top1.mainloop()
+
+    def player_move(self):
+        """
+        TODO: 做三个界面！！！
+        """
+        print("\n")
+        game.current_player.dice()
+        # 投骰子画面
+        game.move()
+        if not game.isGameEnd():
+            # 小人移动界面
+            game.current_player = game.pool.__next__()
+            if game.current_player.name.split("-")[0] == "robot":
+                self.player_move()
+        else:
+            # 游戏结束界面
+            print("game is end")
+
 
     def image_resize(self, path, width, height):
         screen_width = 0

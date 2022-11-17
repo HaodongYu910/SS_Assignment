@@ -21,11 +21,13 @@ class player:
 
     def dice(self):
         self.number = random.randint(1, 6)
+        print("now player {} with colour {} start dice".format(self.name, self.colour))
+        print("player {} got number {}".format(self.name,self.number))
 
-    def isGameEnd(self):
-        if self.current_position == 100:
-            return True
-        # we must ensure the position is accurately equal to 100
-        if self.current_position >= 100:
-            self.current_position -= self.number
-            print("You roll a dice greater than 100, back to the previous position: {}".format(self.current_position))
+    # def isGameEnd(self):
+    #     if self.current_position == 100:
+    #         return True
+    #     # we must ensure the position is accurately equal to 100
+    #     if self.current_position >= 100:
+    #         self.current_position -= self.number
+    #         print("You roll a dice greater than 100, back to the previous position: {}".format(self.current_position))
