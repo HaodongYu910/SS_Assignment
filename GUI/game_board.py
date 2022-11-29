@@ -1,4 +1,6 @@
-from PIL import Image, ImageTk
+import time
+
+from PIL import Image, ImageTk, ImageSequence
 import random
 from Function.gl import *
 import ttkbootstrap as ttk
@@ -9,31 +11,67 @@ class snakeAndLadder_game_board(ttk.Frame):
     def __init__(self, master):
         super().__init__(master, padding=(20, 10))
         self.pack(fill=BOTH, expand=YES)
-        top1 = ttk.Toplevel(master)
+        self.top1 = ttk.Toplevel(master)
         # image = Image.open('D:\Phthon_code\Assignment\map.jpg')
         bg_image = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/bg.jpeg',
                                    700,
                                    700)
         img1 = ImageTk.PhotoImage(bg_image)
-        bg_canvas = ttk.Canvas(top1, width=bg_image.width, height=bg_image.height, bg='white')
+        bg_canvas = ttk.Canvas(self.top1, width=bg_image.width, height=bg_image.height, bg='white')
         bg_canvas.create_image(0, 0, image=img1, anchor="nw")
         bg_canvas.grid(row=1, column=1)
+
         dice_image1 = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/1.jpeg', 100,
                                    100)
-        img2 = ImageTk.PhotoImage(dice_image1)
-        dice_canvas1 = ttk.Canvas(top1, width=dice_image1.width, height=dice_image1.height, bg='white')
-        dice_canvas1.create_image(0, 0, image=img2, anchor="nw")
-        dice_canvas1.grid(row=1, column=2, pady=70, sticky=S)
+        dice_init = ImageTk.PhotoImage(dice_image1)
+        self.dice_canvas1 = ttk.Canvas(self.top1, width=dice_image1.width, height=dice_image1.height, bg='white')
+        self.dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
+        self.dice_canvas1.grid(row=1, column=2, pady=70, sticky=S)
 
         b_roll = ttk.Button(
-            top1,
+            self.top1,
             text='Roll',
             command=self.player_move,
             width=10,
             bootstyle="success")
         b_roll.grid(row=1, column=2, pady=20, sticky=S)
 
-        top1.mainloop()
+        self.top1.mainloop()
+
+    def pick(self):
+        # 删除原先的！
+        self.dice_canvas1.destroy()
+        # 开始摇骰子
+        canvas_gif = ttk.Canvas(self.top1, width=200, height=250)
+        canvas_gif.grid(row=1, column=2, pady=65, sticky=S)
+        num = 0
+        while (num < 2):
+            im = Image.open(
+                '/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/Dice_GIF.gif')
+            # GIF图片流的迭代器
+            iter = ImageSequence.Iterator(im)
+            # frame就是gif的每一帧，转换一下格式就能显示了
+            for frame in iter:
+                pic = ImageTk.PhotoImage(frame)
+                canvas_gif.create_image((100, 150), image=pic)
+                time.sleep(0.05)
+                canvas_gif.update_idletasks()  # 刷新
+                canvas_gif.update()
+            num += 1
+        canvas_gif.destroy()
+
+        # 造新的骰子点数图片
+        dice_number = game.current_player.number
+        print(dice_number)
+        dice_image = self.image_resize(
+            '/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/{}.jpeg'.format(dice_number), 100,
+            100)
+        dice = ImageTk.PhotoImage(dice_image)
+        self.dice_canvas1 = ttk.Canvas(self.top1, width=dice_image.width, height=dice_image.height, bg='white')
+        self.dice_canvas1.create_image(0, 0, image=dice, anchor="nw")
+        self.dice_canvas1.grid(row=1, column=2, pady=70, sticky=S)
+        self.dice_canvas1.mainloop()
+
 
     def player_move(self):
         """
@@ -42,6 +80,7 @@ class snakeAndLadder_game_board(ttk.Frame):
         print("\n")
         game.current_player.dice()
         # 投骰子画面
+        self.pick()
         game.move()
         if not game.isGameEnd():
             # 小人移动界面
@@ -54,6 +93,7 @@ class snakeAndLadder_game_board(ttk.Frame):
 
 
     def image_resize(self, path, width, height):
+        print(path)
         screen_width = 0
         screen_height = 0
         I_WIDTH = int(width)
@@ -83,28 +123,6 @@ class snakeAndLadder_game_board(ttk.Frame):
         min_height = int(raw_height * min_width / raw_width)
         return image.resize((min_width, min_height))
 
-    def sup_window2(self):
-        top1 = ttk.Toplevel()
-        # image = Image.open('D:\Phthon_code\Assignment\map.jpg')
-        image1 = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_assignment/Image', 1200,
-                              1200)
-        img1 = ImageTk.PhotoImage(image1)
-        canvas1 = ttk.Canvas(top1, width=image1.width, height=image1.height, bg='white')
-        canvas1.create_image(0, 0, image=img1, anchor="nw")
-        canvas1.grid(row=1, column=1)
 
-        image2 = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_assignment/Image', 200, 200)
-        img2 = ImageTk.PhotoImage(image2)
-        canvas2 = ttk.Canvas(top1, width=image2.width, height=image2.height, bg='white')
-        canvas2.create_image(0, 0, image=img2, anchor="nw")
-        canvas2.grid(row=1, column=2, pady=70, sticky=S)
 
-        b_roll = ttk.Button(
-            top1,
-            text='Roll',
-            # command=
-            width=10,
-            bootstyle="success")
-        b_roll.grid(row=1, column=2, pady=20, sticky=S)
 
-        top1.mainloop()
