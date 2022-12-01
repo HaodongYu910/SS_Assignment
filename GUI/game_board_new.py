@@ -6,42 +6,20 @@ from Function.gl import *
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
-
-class snakeAndLadder_game_board(ttk.Frame):
+class snakeAndLadder_game_board_new(ttk.Frame):
     def __init__(self, master):
         super().__init__(master, padding=(20, 10))
         self.pack(fill=BOTH, expand=YES)
-        self.top1 = ttk.Toplevel(master)
-        # image = Image.open('D:\Phthon_code\Assignment\map.jpg')
-        bg_image = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/bg.jpeg',
-                                   700,
-                                   700)
-        img1 = ImageTk.PhotoImage(bg_image)
-        bg_canvas = ttk.Canvas(self.top1, width=bg_image.width, height=bg_image.height, bg='white')
-        bg_canvas.create_image(0, 0, image=img1, anchor="nw")
-        bg_canvas.grid(row=1, column=1)
 
-        dice_image1 = self.image_resize('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/1.jpeg', 100,
-                                   100)
-        dice_init = ImageTk.PhotoImage(dice_image1)
-        self.dice_canvas1 = ttk.Canvas(self.top1, width=dice_image1.width, height=dice_image1.height, bg='white')
-        self.dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
-        self.dice_canvas1.grid(row=1, column=2, pady=70, sticky=S)
+        self.create_board()
+        # self.createDice()
+        self.create_rolling_button()
 
-        b_roll = ttk.Button(
-            self.top1,
-            text='Roll',
-            command=self.player_move,
-            width=10,
-            bootstyle="success")
-        b_roll.grid(row=1, column=2, pady=20, sticky=S)
-        self.top1.update()
-        self.top1.mainloop()
 
     def pick(self):
         # 开始摇骰子
-        canvas_gif = ttk.Canvas(self.top1, width=200, height=250)
-        canvas_gif.grid(row=1, column=2, pady=65, sticky=S)
+        canvas_gif = ttk.Canvas(self, width=200, height=250)
+        canvas_gif.pack(side=BOTTOM)
         num = 0
         while (num < 2):
             im = Image.open(
@@ -66,9 +44,9 @@ class snakeAndLadder_game_board(ttk.Frame):
             '/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/{}.jpeg'.format(dice_number), 100,
             100)
         dice = ImageTk.PhotoImage(dice_image)
-        self.dice_canvas1 = ttk.Canvas(self.top1, width=dice_image.width, height=dice_image.height, bg='white')
-        self.dice_canvas1.create_image(0, 0, image=dice, anchor="nw")
-        self.dice_canvas1.grid(row=1, column=2, pady=70, sticky=S)
+        dice_canvas1 = ttk.Canvas(self, width=dice_image.width, height=dice_image.height, bg='white')
+        dice_canvas1.create_image(0, 0, image=dice, anchor="nw")
+        dice_canvas1.pack(side=BOTTOM)
         print("创建成功")
         # self.top1.update()
 
@@ -90,7 +68,7 @@ class snakeAndLadder_game_board(ttk.Frame):
             game.triggerWhat()
             # 小人再次移动
             game.current_player = game.pool.__next__()
-            if game.current_player.name.attribute == "Robot":
+            if game.current_player.name.split("-")[0] == "robot":
                 self.player_move()
         else:
             # 游戏结束界面
@@ -128,6 +106,53 @@ class snakeAndLadder_game_board(ttk.Frame):
         min_height = int(raw_height * min_width / raw_width)
         return image.resize((min_width, min_height))
 
+    def create_board(self):
+        # 创建游戏界面，骰子初始图标
+        container = ttk.Frame(self)
+        container.pack(fill=X, expand=YES, pady=(15, 10))
+
+        # image = Image.open('D:\Phthon_code\Assignment\map.jpg')
+        bg_image = self.image_resize(
+            '/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/bg.jpeg',
+            700,
+            700)
+        img1 = ImageTk.PhotoImage(bg_image)
+        bg_canvas = ttk.Canvas(master=container, width=bg_image.width, height=bg_image.height)
+        bg_canvas.create_image(0, 0, image=img1, anchor="nw")
+        bg_canvas.pack(side=LEFT)
+
+        dice_image1 = self.image_resize(
+            '/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_python_assignment/Image/1.jpeg', 100,
+            100)
+        dice_init = ImageTk.PhotoImage(dice_image1)
+        dice_canvas1 = ttk.Canvas(master=container, width=dice_image1.width, height=dice_image1.height)
+        dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
+        dice_canvas1.pack(side=TOP)
 
 
+
+    def create_rolling_button(self):
+        """Create the dice rolling buttonbox"""
+        # 创建投骰子的按钮，这个OK
+        container = ttk.Frame(self)
+        container.pack(fill=X, expand=YES, pady=(15, 10))
+
+        roll_dice = ttk.Button(
+            master=container,
+            text="Play",
+            command=self.player_move,
+            bootstyle=SUCCESS,
+            width=6,
+        )
+        roll_dice.pack(side=RIGHT, padx=5)
+
+        # submit_player_name = ttk.Button(
+        #     master=container,
+        #     text="Submit",
+        #     command=self.onSubmit,
+        #     bootstyle=SUCCESS,
+        #     width=6,
+        # )
+        # submit_player_name.pack(side=RIGHT, padx=5)
+        roll_dice.focus_set()
 

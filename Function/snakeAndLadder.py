@@ -53,8 +53,16 @@ class snakeAndLadder:
             i.colour = colour_list[temp]
             temp += 1
 
+    def addAttribute_2_player(self, attribute_list):
+        temp = 0
+        for i in self.players:
+            i.attribute = attribute_list[temp]
+            temp += 1
+
     def move(self):
         self.current_player.current_position += self.current_player.number
+
+    def triggerWhat(self):
         # judge if the player trigger the snakes or the ladders
         if self.current_player.current_position in self.snakes.keys():
             self.current_player.current_position = self.snakes[self.current_player.current_position]
@@ -66,7 +74,6 @@ class snakeAndLadder:
                                                             self.current_player.current_position))
         print(
             "player {} now in position {}".format(self.current_player.name, self.current_player.current_position))
-        # judge if the next player is robot.
 
     def isGameEnd(self):
         end_point = 100

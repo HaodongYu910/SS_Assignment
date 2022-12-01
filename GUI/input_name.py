@@ -1,18 +1,5 @@
 from GUI.game_board import *
-
-
-# class snakeAndLadder_bg(ttk.Frame):
-#     def __init__(self, master):
-#         super().__init__(master, padding=(20, 10))
-#         self.pack(fill=BOTH, expand=YES)
-#         mytoplevel = ttk.Toplevel(master)
-#         image = Image.open('/Users/yuhaodong/Desktop/Postgraduate/System and software/SS_assignment/Image/bg.jpeg')
-#         img = ImageTk.PhotoImage(image)
-#         canvas1 = ttk.Canvas(mytoplevel, width=image.width * 2, height=image.height * 2, bg='white')
-#         canvas1.create_image(0, 0, image=img, anchor="nw")
-#         canvas1.create_image(image.width, 0, image=img, anchor="nw")
-#         canvas1.pack()
-#         mytoplevel.mainloop()
+from GUI.game_board_new import *
 
 
 class NameEntryForm(ttk.Frame):
@@ -23,12 +10,19 @@ class NameEntryForm(ttk.Frame):
 
         # form variables
         self.p1 = ttk.StringVar(value="")
-        self.p2 = ttk.StringVar(value="")
-        self.p3 = ttk.StringVar(value="")
-        self.p4 = ttk.StringVar(value="")
+        self.p1_attribute = ttk.StringVar(value="")
         self.p1_colour = ttk.StringVar(value="")
+
+        self.p2 = ttk.StringVar(value="")
+        self.p2_attribute = ttk.StringVar(value="")
         self.p2_colour = ttk.StringVar(value="")
+
+        self.p3 = ttk.StringVar(value="")
+        self.p3_attribute = ttk.StringVar(value="")
         self.p3_colour = ttk.StringVar(value="")
+
+        self.p4 = ttk.StringVar(value="")
+        self.p4_attribute = ttk.StringVar(value="")
         self.p4_colour = ttk.StringVar(value="")
 
         # form header
@@ -37,14 +31,13 @@ class NameEntryForm(ttk.Frame):
         hdr.pack(fill=X, pady=10)
 
         # form entries
-        self.create_form_entry("Player1", self.p1, self.p1_colour)
-        self.create_form_entry("Player2", self.p2, self.p2_colour)
-        self.create_form_entry("Player3", self.p3, self.p3_colour)
-        self.create_form_entry("Player4", self.p4, self.p4_colour)
+        self.create_form_entry("Player1", self.p1, self.p1_colour, self.p1_attribute)
+        self.create_form_entry("Player2", self.p2, self.p2_colour, self.p2_attribute)
+        self.create_form_entry("Player3", self.p3, self.p3_colour, self.p3_attribute)
+        self.create_form_entry("Player4", self.p4, self.p4_colour, self.p4_attribute)
         self.create_buttonbox()
 
-
-    def create_form_entry(self, label, variable, colour):
+    def create_form_entry(self, label, variable, colour, attribute):
         """Create a single form entry"""
         container = ttk.Frame(self)
         container.pack(fill=X, expand=YES, pady=5)
@@ -57,10 +50,16 @@ class NameEntryForm(ttk.Frame):
         ent = ttk.Entry(master=container, textvariable=variable)
         ent.pack(side=LEFT, padx=5, fill=X, expand=YES)
 
-        # this player's combobox
+        # is this player is a robot?
+        combobox_attribute = ttk.Combobox(master=container, textvariable=attribute)
+        combobox_attribute.pack(side=LEFT, padx=5, fill=X, expand=YES)
+        combobox_attribute['value'] = ('Robot', 'Player')
+        combobox_attribute.current(0)
+
+        # this player's colour
         combobox = ttk.Combobox(master=container, textvariable=colour)
         combobox.pack(side=LEFT, padx=5, fill=X, expand=YES)
-        combobox['value'] = ('Red', 'Blue', 'Black', 'Grey')
+        combobox['value'] = ('Red', 'Blue', 'Green', 'Yellow')
         combobox.current(3)
 
     def create_buttonbox(self):
@@ -89,20 +88,24 @@ class NameEntryForm(ttk.Frame):
 
     def onSubmit(self):
         """Print the contents to console and return the values."""
-        print("Player1:{}, Colour:{}".format(self.p1.get(), self.p1_colour.get()))
-        print("Player2:{}, Colour:{}".format(self.p1.get(), self.p2_colour.get()))
-        print("Player3:{}, Colour:{}".format(self.p1.get(), self.p3_colour.get()))
-        print("Player4:{}, Colour:{}".format(self.p1.get(), self.p4_colour.get()))
+        print("Player1:{}, Colour:{}, attribute:{}".format(self.p1.get(), self.p1_colour.get(), self.p1_attribute.get()))
+        print("Player2:{}, Colour:{}, attribute:{}".format(self.p2.get(), self.p2_colour.get(), self.p2_attribute.get()))
+        print("Player3:{}, Colour:{}, attribute:{}".format(self.p3.get(), self.p3_colour.get(), self.p3_attribute.get()))
+        print("Player4:{}, Colour:{}, attribute:{}".format(self.p4.get(), self.p4_colour.get(), self.p4_attribute.get()))
         list_player = [self.p1.get(), self.p2.get(), self.p3.get(), self.p4.get()]
         list_colour = [self.p1_colour.get(), self.p2_colour.get(), self.p3_colour.get(), self.p4_colour.get()]
+        list_attribute = [self.p1_attribute.get(), self.p2_attribute.get(), self.p3_attribute.get(), self.p4_attribute.get()]
         # snakeAndLadder.addPlayer(list_player)
         game.addPlayer(list_player)
         game.addColour_2_player(list_colour)
+        game.addAttribute_2_player(list_attribute)
         # return self.p1.get(), self.p2.get(), self.p3.get(), self.p4.get()
 
     def onStart(self):
         """Cancel and close the application."""
-        snakeAndLadder_game_board(self.master)
+        self.destroy()
+        snakeAndLadder_game_board_new(self.master)
+        # snakeAndLadder_game_board(self.master)
 
 
 if __name__ == "__main__":
