@@ -90,7 +90,7 @@ class snakeAndLadder_game_board(ttk.Frame):
             game.triggerWhat()
             # 小人再次移动
             game.current_player = game.pool.__next__()
-            if game.current_player.name.attribute == "Robot":
+            if game.current_player.attribute == "Robot":
                 self.player_move()
         else:
             # 游戏结束界面

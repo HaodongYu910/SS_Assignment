@@ -68,10 +68,12 @@ class snakeAndLadder:
             self.current_player.current_position = self.snakes[self.current_player.current_position]
             print("snakes!!! player {} back to {}".format(self.current_player.name,
                                                           self.current_player.current_position))
-        if self.current_player.current_position in self.ladders.keys():
+        elif self.current_player.current_position in self.ladders.keys():
             self.current_player.current_position = self.ladders[self.current_player.current_position]
             print("ladders!!! player {} Going to {}".format(self.current_player.name,
                                                             self.current_player.current_position))
+        else:
+            print("player did not trigger any snake or ladder")
         print(
             "player {} now in position {}".format(self.current_player.name, self.current_player.current_position))
 
