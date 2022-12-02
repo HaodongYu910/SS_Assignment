@@ -10,8 +10,6 @@ class snakeAndLadder_game_board_new(ttk.Frame):
     def __init__(self, master):
         super().__init__(master, padding=(20, 10))
         self.pack(fill=BOTH, expand=YES)
-
-
         self.create_board()
         # self.createDice()
         # self.create_rolling_button()
