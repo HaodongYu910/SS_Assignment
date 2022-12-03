@@ -60,7 +60,9 @@ class Snake_and_Ladders:
                 elif event.type == pygame.MOUSEBUTTONDOWN:  # 点开始键就进入下一个环节，这一步设置self.game_active = True，用来指示游戏开始；注意！！！每轮游戏结束后要设置self.game_active = False 否则画不出背景图
                     mouse_pos = pygame.mouse.get_pos()
                     self._check_play_button(mouse_pos)
-                    self.start_ttk()
+
+
+
 
             self.screen.fill(self.bg_color)  # 点击开始键后显示的界面，在初始时放在最下面的一个图层（被背景图覆盖）。游戏进行中的界面应该加在这里
 
@@ -74,13 +76,11 @@ class Snake_and_Ladders:
         if self.play_button.rect.collidepoint(mouse_pos) and not self.game_active:
             self.game_active = True
 
-    def start_ttk(self):
-        root = ttk.Window()
-        basedesk(root)
-        root.mainloop()
-
 
 if __name__ == "__main__":
     game1 = Snake_and_Ladders()  # 创建一个游戏对象
     game1.run_game()  # 运行游戏
+    root = ttk.Window()
+    basedesk(root)
+    root.mainloop()
 
