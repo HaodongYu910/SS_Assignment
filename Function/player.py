@@ -19,6 +19,7 @@ class player:
         self.is_robot = False
         self.colour = ""
         self.attribute = ""
+        self.No = 0
 
     def dice(self):
         self.number = random.randint(1, 6)

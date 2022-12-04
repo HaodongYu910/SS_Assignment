@@ -88,13 +88,18 @@ class NameEntryForm(ttk.Frame):
 
     def onSubmit(self):
         """Print the contents to console and return the values."""
-        print("Player1:{}, Colour:{}, attribute:{}".format(self.p1.get(), self.p1_colour.get(), self.p1_attribute.get()))
-        print("Player2:{}, Colour:{}, attribute:{}".format(self.p2.get(), self.p2_colour.get(), self.p2_attribute.get()))
-        print("Player3:{}, Colour:{}, attribute:{}".format(self.p3.get(), self.p3_colour.get(), self.p3_attribute.get()))
-        print("Player4:{}, Colour:{}, attribute:{}".format(self.p4.get(), self.p4_colour.get(), self.p4_attribute.get()))
+        print(
+            "Player1:{}, Colour:{}, attribute:{}".format(self.p1.get(), self.p1_colour.get(), self.p1_attribute.get()))
+        print(
+            "Player2:{}, Colour:{}, attribute:{}".format(self.p2.get(), self.p2_colour.get(), self.p2_attribute.get()))
+        print(
+            "Player3:{}, Colour:{}, attribute:{}".format(self.p3.get(), self.p3_colour.get(), self.p3_attribute.get()))
+        print(
+            "Player4:{}, Colour:{}, attribute:{}".format(self.p4.get(), self.p4_colour.get(), self.p4_attribute.get()))
         list_player = [self.p1.get(), self.p2.get(), self.p3.get(), self.p4.get()]
         list_colour = [self.p1_colour.get(), self.p2_colour.get(), self.p3_colour.get(), self.p4_colour.get()]
-        list_attribute = [self.p1_attribute.get(), self.p2_attribute.get(), self.p3_attribute.get(), self.p4_attribute.get()]
+        list_attribute = [self.p1_attribute.get(), self.p2_attribute.get(), self.p3_attribute.get(),
+                          self.p4_attribute.get()]
         # snakeAndLadder.addPlayer(list_player)
         game.addPlayer(list_player)
         game.addColour_2_player(list_colour)

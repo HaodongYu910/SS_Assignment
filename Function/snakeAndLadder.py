@@ -34,11 +34,12 @@ class snakeAndLadder:
                 if not i == "":
                     self.players.append(player(i))
                 else:
-                    robot = player("robot" + "-" + str(datetime.now().time()))
-                    robot.is_robot = True
-                    self.players.append(robot)
-
+                    random_name = player("Player" + "-" + str(datetime.now().time()))
+                    self.players.append(player(random_name))
+            temp = 1
             for i in self.players:
+                i.No = temp
+                temp += 1
                 print(i.name)
         else:
             print("Please do not submit more than one time")
