@@ -21,14 +21,14 @@ class initface():
         self.initface = ttk.Frame(self.master, )
         self.initface.pack()
 
-        btn = ttk.Button(
-            self.initface, text='Go',
-            command=self.change,
-            width=10,
-            bootstyle="success")
-        btn.grid(pady=200)
-
-    def change(self):
+    #     btn = ttk.Button(
+    #         self.initface, text='Go',
+    #         command=self.change,
+    #         width=10,
+    #         bootstyle="success")
+    #     btn.grid(pady=200)
+    #
+    # def change(self):
         self.initface.destroy()
         # face1(self.master)
         NameEntryForm(self.master)
