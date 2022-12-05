@@ -9,16 +9,15 @@ from ttkbootstrap.constants import *
 class snakeAndLadder_game_board_new(ttk.Frame):
     def __init__(self, master):
         super().__init__(master, padding=(20, 10))
-        self.p1_I = None
         self.pack(fill=BOTH, expand=YES)
         self.bg_canvas = ttk.Canvas(self, width=700, height=700, bg='white')
         self.bg_canvas.pack(side=LEFT)
         self.dice_canvas1 = ttk.Canvas(self, width=250, height=250, bg='white')
-        self.dice_canvas1.pack(side=LEFT)
+        self.dice_canvas1.pack(side=TOP)
         self.start_area_canvas = ttk.Canvas(self, width=250, height=250, bg='white')
         self.start_area_canvas.pack(side=BOTTOM)
         self.text_set = ttk.Label(self, text="Departure area", bootstyle="dark")
-        self.text_set.pack()
+        self.text_set.pack(side=BOTTOM)
 
         self.create_board()
 
@@ -67,6 +66,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         self.dice_canvas1.create_image(0, 0, image=dice, anchor="nw")
 
         print("创建成功")
+
         # self.top1.update()
 
     def player_move(self):
@@ -87,10 +87,12 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             previous_position = game.current_player.current_position
             game.triggerWhat()
             # 小人再次移动
+            self.imag_movement(game.current_player.No, game.current_player.current_position)
             game.current_player = game.pool.__next__()
             if game.current_player.attribute == "Robot":
                 self.player_move()
         else:
+            self.imag_movement(game.current_player.No, game.current_player.current_position)
             # 游戏结束界面
             print("game is end")
 
@@ -134,15 +136,14 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         img1 = ImageTk.PhotoImage(bg_image)
 
         self.bg_canvas.create_image(0, 0, image=img1, anchor="nw")
-        self.bg_canvas.pack(side=LEFT)
+
 
         dice_image1 = self.image_resize(
             '../Image/0.jpeg', 200,
             200)
         dice_init = ImageTk.PhotoImage(dice_image1)
-        self.dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
-        self.dice_canvas1.pack(side=TOP)
-
+        dice_ini=self.dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
+        self.dice_canvas1.delete(dice_ini)
         roll_dice = ttk.Button(
             master=self,
             text="Play",
@@ -153,20 +154,20 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         roll_dice.pack(side=RIGHT, padx=5)
 
         # 图片插入
-        player1_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[0].colour), 800 * 0.025,
-                                          800 * 0.025)
+        player1_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[0].colour), 700 * 0.025,
+                                          700 * 0.025)
         self.p1_I = ImageTk.PhotoImage(player1_image)
 
-        player2_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[1].colour), 800 * 0.025,
-                                          800 * 0.025)
+        player2_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[1].colour), 700 * 0.025,
+                                          700 * 0.025)
         self.p2_I = ImageTk.PhotoImage(player2_image)
 
-        player3_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[2].colour), 800 * 0.025,
-                                          800 * 0.025)
+        player3_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[2].colour), 700 * 0.025,
+                                          700 * 0.025)
         self.p3_I = ImageTk.PhotoImage(player3_image)
 
-        player4_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[3].colour), 800 * 0.025,
-                                          800 * 0.025)
+        player4_image = self.image_resize('../Image/player/{}.jpg'.format(game.players[3].colour), 700 * 0.025,
+                                          700 * 0.025)
         self.p4_I = ImageTk.PhotoImage(player4_image)
 
         # 出发区域画布
@@ -186,7 +187,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
 
     def imag_movement(self, player_no, step):
 
-        imag_size = 800
+        imag_size = 700
 
         initial_x1 = imag_size * 0.025
         initial_x2 = imag_size * 0.055

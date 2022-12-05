@@ -22,7 +22,7 @@ class snakeAndLadder:
         self.current_player = None
         self.players = []
         self.snakes = {99: 69, 91: 61, 87: 57, 65: 52, 47: 19, 34: 1, 25: 5}
-        self.ladders = {69: 98, 63: 95, 3: 51, 36: 55, 20: 70, 6: 27}
+        self.ladders = {68: 98, 63: 95, 3: 51, 36: 55, 20: 70, 6: 27}
         # self.ladders = {69: 98, 63: 95, 3: 4, 36: 55, 29: 70, 6: 19}
         self.pool = None
 
