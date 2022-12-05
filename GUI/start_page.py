@@ -61,14 +61,12 @@ class Snake_and_Ladders:
                     mouse_pos = pygame.mouse.get_pos()
                     self._check_play_button(mouse_pos)
 
-
-
-
-            self.screen.fill(self.bg_color)  # 点击开始键后显示的界面，在初始时放在最下面的一个图层（被背景图覆盖）。游戏进行中的界面应该加在这里
-
             if not self.game_active:  # 游戏没有开始的话，将背景图绘制上去
                 self.screen.blit(picture, (0, 0))
-                # self.play_button.draw_button()
+            else:
+                pygame.quit()    # 关闭窗口
+                break    # 跳出循环，结束程序
+
             # 刷新界面
             pygame.display.flip()
 
