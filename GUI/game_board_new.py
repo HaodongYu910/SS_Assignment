@@ -79,7 +79,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         print(dice_number)
         variable = "self.dice"+str(dice_number)
         self.dice_canvas1.delete(self.dice_init)
-        self.dice_canvas1.create_image(0, 0, image=self.dice6, anchor="nw")
+        self.dice_canvas1.create_image(0, 0, image=eval(variable), anchor="nw")
 
         print("创建成功")
         # self.top1.update()
@@ -197,28 +197,28 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         self.p4 = self.bg_canvas.create_image(-60, -60, image=self.p4_I)
 
         # 创建初始骰子，并放出区域外
-        self.dice_image1 = self.image_resize(
+        dice_image1 = self.image_resize(
             '../Image/1.jpeg', 200, 200)
         self.dice1 = ImageTk.PhotoImage(dice_image1)
-        self.dice_image2 = self.image_resize(
+        dice_image2 = self.image_resize(
             '../Image/2.jpeg', 200, 200)
-        self.dice2 = ImageTk.PhotoImage(dice_image1)
-        self.dice_image3 = self.image_resize(
+        self.dice2 = ImageTk.PhotoImage(dice_image2)
+        dice_image3 = self.image_resize(
             '../Image/3.jpeg', 200, 200)
-        self.dice3 = ImageTk.PhotoImage(dice_image1)
-        self.dice_image4 = self.image_resize(
+        self.dice3 = ImageTk.PhotoImage(dice_image3)
+        dice_image4 = self.image_resize(
             '../Image/4.jpeg', 200, 200)
-        self.dice4 = ImageTk.PhotoImage(dice_image1)
-        self.dice_image5 = self.image_resize(
+        self.dice4 = ImageTk.PhotoImage(dice_image4)
+        dice_image5 = self.image_resize(
             '../Image/5.jpeg', 200, 200)
-        self.dice5 = ImageTk.PhotoImage(dice_image1)
-        self.dice_image6 = self.image_resize(
+        self.dice5 = ImageTk.PhotoImage(dice_image5)
+        dice_image6 = self.image_resize(
             '../Image/6.jpeg', 200, 200)
-        self.dice6 = ImageTk.PhotoImage(dice_image1)
+        self.dice6 = ImageTk.PhotoImage(dice_image6)
 
         # self.dice = self.dice_canvas1.create_image(-60, -60, image=self.dice1)
 
-        self.dice1 = self.bg_canvas.create_image(-60, -60, image=self.p1_I)
+        # self.dice1 = self.bg_canvas.create_image(-60, -60, image=self.p1_I)
 
         self.mainloop()
 
