@@ -29,9 +29,9 @@ class initface():
     #     btn.grid(pady=200)
     #
     # def change(self):
-    #     self.initface.destroy()
-    #     # face1(self.master)
-    #     NameEntryForm(self.master)
+        self.initface.destroy()
+        # face1(self.master)
+        NameEntryForm(self.master)
 
 
 if __name__ == '__main__':
