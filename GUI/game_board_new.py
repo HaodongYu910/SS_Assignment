@@ -9,20 +9,16 @@ from ttkbootstrap.constants import *
 class snakeAndLadder_game_board_new(ttk.Frame):
     def __init__(self, master):
         super().__init__(master, padding=(20, 10))
-<<<<<<< HEAD
-=======
+
         self.dice_init = None
         self.p1_I = None
->>>>>>> db760cd229f74def0f5aa4dc9541551d9b9637c7
         self.pack(fill=BOTH, expand=YES)
         self.bg_canvas = ttk.Canvas(self, width=700, height=700, bg='white')
         self.bg_canvas.pack(side=LEFT)
         self.dice_canvas1 = ttk.Canvas(self, width=250, height=250, bg='white')
-<<<<<<< HEAD
-        self.dice_canvas1.pack(side=TOP)
-=======
+
         self.dice_canvas1.pack(side=BOTTOM)
->>>>>>> db760cd229f74def0f5aa4dc9541551d9b9637c7
+
         self.start_area_canvas = ttk.Canvas(self, width=250, height=250, bg='white')
         self.start_area_canvas.pack(side=BOTTOM)
         self.text_set = ttk.Label(self, text="Departure area", bootstyle="dark")
@@ -109,10 +105,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             self.imag_movement(game.current_player.No, game.current_player.current_position)
             previous_position = game.current_player.current_position
             game.triggerWhat()
-<<<<<<< HEAD
-            # 小人再次移动
-=======
->>>>>>> db760cd229f74def0f5aa4dc9541551d9b9637c7
+            # 小人再次移动界面
             self.imag_movement(game.current_player.No, game.current_player.current_position)
             game.current_player = game.pool.__next__()
             if game.current_player.attribute == "Robot":
@@ -162,23 +155,16 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         img1 = ImageTk.PhotoImage(bg_image)
 
         self.bg_canvas.create_image(0, 0, image=img1, anchor="nw")
-<<<<<<< HEAD
 
-=======
->>>>>>> db760cd229f74def0f5aa4dc9541551d9b9637c7
 
         dice_image1 = self.image_resize(
             '../Image/0.jpeg', 200,
             200)
-<<<<<<< HEAD
-        dice_init = ImageTk.PhotoImage(dice_image1)
-        dice_ini=self.dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
-        self.dice_canvas1.delete(dice_ini)
-=======
+
         self.dice_init = ImageTk.PhotoImage(dice_image1)
         self.dice_canvas1.create_image(0, 0, image=self.dice_init, anchor="nw")
 
->>>>>>> db760cd229f74def0f5aa4dc9541551d9b9637c7
+
         roll_dice = ttk.Button(
             master=self,
             text="Play",
