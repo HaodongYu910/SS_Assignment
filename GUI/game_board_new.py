@@ -9,12 +9,13 @@ from ttkbootstrap.constants import *
 class snakeAndLadder_game_board_new(ttk.Frame):
     def __init__(self, master):
         super().__init__(master, padding=(20, 10))
+        self.dice_init = None
         self.p1_I = None
         self.pack(fill=BOTH, expand=YES)
         self.bg_canvas = ttk.Canvas(self, width=700, height=700, bg='white')
         self.bg_canvas.pack(side=LEFT)
         self.dice_canvas1 = ttk.Canvas(self, width=250, height=250, bg='white')
-        self.dice_canvas1.pack(side=TOP)
+        self.dice_canvas1.pack(side=BOTTOM)
         self.start_area_canvas = ttk.Canvas(self, width=250, height=250, bg='white')
         self.start_area_canvas.pack(side=BOTTOM)
         self.text_set = ttk.Label(self, text="Departure area", bootstyle="dark")
@@ -22,7 +23,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
 
         self.create_board()
 
-        ## player settings
+        # player settings
         self.p1_set = None
         self.p2_set = None
         self.p3_set = None
@@ -35,6 +36,22 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         self.p2_I = None
         self.p3_I = None
         self.p4_I = None
+
+        # dice settings
+        self.dice_init = None
+        self.dice = None
+        self.dice1 = None
+        self.dice_image1 = None
+        self.dice2 = None
+        self.dice_image2 = None
+        self.dice3 = None
+        self.dice_image3 = None
+        self.dice4 = None
+        self.dice_image4 = None
+        self.dice5 = None
+        self.dice_image5 = None
+        self.dice6 = None
+        self.dice_image6 = None
 
     def pick(self):
         # 开始摇骰子
@@ -60,11 +77,9 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         # 造新的骰子点数图片
         dice_number = game.current_player.number
         print(dice_number)
-        dice_image = self.image_resize(
-            '../Image/{}.jpeg'.format(dice_number), 200, 200)
-        dice = ImageTk.PhotoImage(dice_image)
-
-        self.dice_canvas1.create_image(0, 0, image=dice, anchor="nw")
+        variable = "self.dice"+str(dice_number)
+        self.dice_canvas1.delete(self.dice_init)
+        self.dice_canvas1.create_image(0, 0, image=self.dice6, anchor="nw")
 
         print("创建成功")
         # self.top1.update()
@@ -136,13 +151,11 @@ class snakeAndLadder_game_board_new(ttk.Frame):
 
         self.bg_canvas.create_image(0, 0, image=img1, anchor="nw")
 
-
         dice_image1 = self.image_resize(
             '../Image/0.jpeg', 200,
             200)
-        dice_init = ImageTk.PhotoImage(dice_image1)
-        self.dice_canvas1.create_image(0, 0, image=dice_init, anchor="nw")
-
+        self.dice_init = ImageTk.PhotoImage(dice_image1)
+        self.dice_canvas1.create_image(0, 0, image=self.dice_init, anchor="nw")
 
         roll_dice = ttk.Button(
             master=self,
@@ -182,6 +195,30 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         self.p2 = self.bg_canvas.create_image(-60, -60, image=self.p2_I)
         self.p3 = self.bg_canvas.create_image(-60, -60, image=self.p3_I)
         self.p4 = self.bg_canvas.create_image(-60, -60, image=self.p4_I)
+
+        # 创建初始骰子，并放出区域外
+        self.dice_image1 = self.image_resize(
+            '../Image/1.jpeg', 200, 200)
+        self.dice1 = ImageTk.PhotoImage(dice_image1)
+        self.dice_image2 = self.image_resize(
+            '../Image/2.jpeg', 200, 200)
+        self.dice2 = ImageTk.PhotoImage(dice_image1)
+        self.dice_image3 = self.image_resize(
+            '../Image/3.jpeg', 200, 200)
+        self.dice3 = ImageTk.PhotoImage(dice_image1)
+        self.dice_image4 = self.image_resize(
+            '../Image/4.jpeg', 200, 200)
+        self.dice4 = ImageTk.PhotoImage(dice_image1)
+        self.dice_image5 = self.image_resize(
+            '../Image/5.jpeg', 200, 200)
+        self.dice5 = ImageTk.PhotoImage(dice_image1)
+        self.dice_image6 = self.image_resize(
+            '../Image/6.jpeg', 200, 200)
+        self.dice6 = ImageTk.PhotoImage(dice_image1)
+
+        # self.dice = self.dice_canvas1.create_image(-60, -60, image=self.dice1)
+
+        self.dice1 = self.bg_canvas.create_image(-60, -60, image=self.p1_I)
 
         self.mainloop()
 
