@@ -1,3 +1,5 @@
+from ttkbootstrap.toast import ToastNotification
+
 from GUI.game_board_new import *
 
 
@@ -108,8 +110,35 @@ class NameEntryForm(ttk.Frame):
     def onStart(self):
         """Cancel and close the application."""
         self.destroy()
+        game_start_alart(self.master)
+
+class game_start_alart(ttk.Frame):
+
+    def __init__(self, master):
+        super().__init__(master, padding=(20, 10))
+        self.pack(fill=BOTH, expand=YES)
+        hdr_txt = "Game will be start!!!!"
+        hdr = ttk.Label(master=self, text=hdr_txt, width=50, style="danger", font=('Helvetica', 50))
+        hdr.pack(padx=150, pady=30)
+        self.create_buttonbox()
+
+    def create_buttonbox(self):
+        """Create the application buttonbox"""
+        container = ttk.Frame(self)
+        container.pack(fill=X, expand=YES, pady=(15, 10))
+
+        start_game = ttk.Button(
+            master=container,
+            text="OK!",
+            command=self.onStart,
+            bootstyle=INFO,
+            width=6,
+        )
+        start_game.pack(side=BOTTOM, padx=5)
+
+    def onStart(self):
+        self.destroy()
         snakeAndLadder_game_board_new(self.master)
-        # snakeAndLadder_game_board(self.master)
 
 
 if __name__ == "__main__":

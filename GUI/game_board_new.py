@@ -1,6 +1,8 @@
 import time
 
 from PIL import Image, ImageTk, ImageSequence
+from ttkbootstrap.toast import ToastNotification
+
 from Function.gl import *
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -88,6 +90,13 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         # self.top1.update()
 
     # def creat_scoreboard(self,):#playername,#playerstep
+    def show_toast(self):
+        toast = ToastNotification(
+            title="Current player notification",
+            message="It is player {} turn now. GoGoGo!!!!".format(game.current_player.name),
+            duration=2000,
+        )
+        toast.show_toast()
 
     def player_move(self):
         print("\n")
@@ -111,6 +120,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
                 self.imag_movement(game.current_player.No, game.current_player.current_position)
             # 进入下一个玩家
             game.current_player = game.pool.__next__()
+            self.show_toast()
             # 判断下一个玩家是不是机器人，如果是机器人，就自动再来一次，不需要再点一次骰子
             if game.current_player.attribute == "Robot":
                 self.player_move()
