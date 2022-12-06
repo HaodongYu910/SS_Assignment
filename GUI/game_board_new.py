@@ -90,31 +90,37 @@ class snakeAndLadder_game_board_new(ttk.Frame):
     # def creat_scoreboard(self,):#playername,#playerstep
 
     def player_move(self):
-        """
-        TODO: 做三个界面！！！
-        """
         print("\n")
         game.current_player.dice()
         # 投骰子画面
-
         self.pick()
+        # 投骰子结束界面
         self.createDice()
         previous_position = game.current_player.current_position
+        # 让当前玩家移动（这时候可以超过100，后面的isGameEnd会判断当前移动是否合理）
         game.move()
         if not game.isGameEnd():
             # 小人移动界面
             self.imag_movement(game.current_player.No, game.current_player.current_position)
             previous_position = game.current_player.current_position
-            game.triggerWhat()
-            time.sleep(0.5)
-            # 小人再次移动界面
-            self.imag_movement(game.current_player.No, game.current_player.current_position)
+            # 让游戏判断是不是触发了snake或者ladder，触发后会自动在triggerWhat方法里面对当前玩家进行操作
+            if game.triggerWhat():
+                # 小人再次移动界面
+                # 停顿0.5s 让小人有一个被蛇吞或者蹬梯子的感觉
+                time.sleep(0.5)
+                self.imag_movement(game.current_player.No, game.current_player.current_position)
+            # 进入下一个玩家
             game.current_player = game.pool.__next__()
+            # 判断下一个玩家是不是机器人，如果是机器人，就自动再来一次，不需要再点一次骰子
             if game.current_player.attribute == "Robot":
                 self.player_move()
         else:
+            # 如果游戏结束了，让当前玩家移动到格子100
             self.imag_movement(game.current_player.No, game.current_player.current_position)
             # 游戏结束界面
+            """
+            TODO：游戏结束界面！！可以直接新做一个function，在这里直接调用。
+            """
             print("game is end")
 
     def image_resize(self, path, width, height):
@@ -264,7 +270,9 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         self.mainloop()
 
     def imag_movement(self, player_no, step):
-
+        """
+        这个方程是实现小人在游戏布上走动的
+        """
         imag_size = 700
 
         initial_x1 = imag_size * 0.025
@@ -275,7 +283,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         initial_y3 = imag_size * 0.976
 
         step_size = imag_size * 0.1
-
+        # 分四个if，每一个对应一个player
         if player_no == 1:
             self.start_area_canvas.delete(self.p1_set)
             y_r = initial_y1 - step_size * (step // 10)
