@@ -1,4 +1,3 @@
-from GUI.game_board import *
 from GUI.game_board_new import *
 
 

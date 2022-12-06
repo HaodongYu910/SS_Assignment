@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 from itertools import cycle
 from Function.player import *
@@ -18,7 +19,6 @@ class snakeAndLadder:
         """
 
     def __init__(self):
-        self.game_status = None
         self.current_player = None
         self.players = []
         self.snakes = {99: 69, 91: 61, 87: 57, 65: 52, 47: 19, 34: 1, 25: 5}
@@ -34,7 +34,7 @@ class snakeAndLadder:
                 if not i == "":
                     self.players.append(player(i))
                 else:
-                    random_name = player("Player" + "-" + str(datetime.now().time()))
+                    random_name = "Player" + "-" + str(datetime.now().microsecond)
                     self.players.append(player(random_name))
             temp = 1
             for i in self.players:
@@ -82,7 +82,6 @@ class snakeAndLadder:
         end_point = 100
         if self.current_player.current_position == end_point:
             # game status equals to 1 means game is ended
-            self.game_status = 1
             return True
         # we must ensure the position is accurately equal to 100
         if self.current_player.current_position >= end_point:
@@ -90,11 +89,9 @@ class snakeAndLadder:
             print("You roll a dice greater than {}, back to the previous position: {}".format(end_point,
                 self.current_player.current_position))
             # game status equals to 0 means game is not ended
-            self.game_status = 0
             return False
         # if current player did not meet the game end request, then conitnue the game
         if self.current_player.current_position < end_point:
             print("Current player {} did not meet the end, Game continue".format(self.current_player.name))
             # game status equals to 0 means game is not ended
-            self.game_status = 0
             return False

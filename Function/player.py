@@ -16,7 +16,6 @@ class player:
         self.name = name
         self.number = 0
         self.current_position = 0
-        self.is_robot = False
         self.colour = ""
         self.attribute = ""
         self.No = 0
