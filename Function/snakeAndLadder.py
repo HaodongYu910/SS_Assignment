@@ -1,6 +1,9 @@
 import time
 from datetime import datetime
 from itertools import cycle
+
+from ttkbootstrap.toast import ToastNotification
+
 from Function.player import *
 
 
@@ -42,7 +45,12 @@ class snakeAndLadder:
                 temp += 1
                 print(i.name)
         else:
-            print("Please do not submit more than one time")
+            toast = ToastNotification(
+                title="Adding player notification",
+                message="Please do not submit more than once!! Info won't be change!!",
+                duration=5000
+            )
+            toast.show_toast()
 
         # define the first player
         self.pool = cycle(self.players)
@@ -50,15 +58,18 @@ class snakeAndLadder:
 
     def addColour_2_player(self, colour_list):
         temp = 0
-        for i in self.players:
-            i.colour = colour_list[temp]
-            temp += 1
+        if self.players[0].attribute == "":
+            for i in self.players:
+                i.colour = colour_list[temp]
+                temp += 1
+
 
     def addAttribute_2_player(self, attribute_list):
         temp = 0
-        for i in self.players:
-            i.attribute = attribute_list[temp]
-            temp += 1
+        if self.players[0].attribute == "":
+            for i in self.players:
+                i.attribute = attribute_list[temp]
+                temp += 1
 
     def move(self):
         self.current_player.current_position += self.current_player.number

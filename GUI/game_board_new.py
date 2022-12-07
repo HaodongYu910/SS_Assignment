@@ -128,10 +128,8 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             # 如果游戏结束了，让当前玩家移动到格子100
             self.imag_movement(game.current_player.No, game.current_player.current_position)
             # 游戏结束界面
-            """
-            TODO：游戏结束界面！！可以直接新做一个function，在这里直接调用。
-            """
             print("game is end")
+            self.master.destroy()
 
     def image_resize(self, path, width, height):
         print(path)

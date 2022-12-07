@@ -27,7 +27,7 @@ class NameEntryForm(ttk.Frame):
         self.p4_colour = ttk.StringVar(value="")
 
         # form header
-        hdr_txt = "Please enter the name of different User\n(Hint: blank name will auto create a robot!!)"
+        hdr_txt = "Please enter the name of different User\n(Hint: blank name will be named automatically!!)"
         hdr = ttk.Label(master=self, text=hdr_txt, width=50)
         hdr.pack(fill=X, pady=10)
 
@@ -106,11 +106,23 @@ class NameEntryForm(ttk.Frame):
         game.addColour_2_player(list_colour)
         game.addAttribute_2_player(list_attribute)
         # return self.p1.get(), self.p2.get(), self.p3.get(), self.p4.get()
+        toast = ToastNotification(
+            title="Adding player notification",
+            message="Players have been create successfully\n"
+                    "player1: {}\n"
+                    "player2: {}\n"
+                    "player3: {}\n"
+                    "player4: {}".format(game.players[0].name, game.players[1].name, game.players[2].name,
+                                         game.players[3].name),
+            duration=5000,
+        )
+        toast.show_toast()
 
     def onStart(self):
         """Cancel and close the application."""
         self.destroy()
         game_start_alart(self.master)
+
 
 class game_start_alart(ttk.Frame):
 
