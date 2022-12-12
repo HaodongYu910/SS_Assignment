@@ -28,6 +28,7 @@ class snakeAndLadder:
         self.ladders = {68: 98, 63: 95, 3: 51, 36: 55, 20: 70, 6: 27}
         # self.ladders = {69: 98, 63: 95, 3: 4, 36: 55, 29: 70, 6: 19}
         self.pool = None
+        self.winner = ""
 
     def addPlayer(self, player_list):
         # add player object into player list

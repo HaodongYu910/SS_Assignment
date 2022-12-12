@@ -31,7 +31,12 @@ class Button_:
 
 
 class SelectPage:
-
+    """
+    TODO: 还需要展示一下是那个玩家赢得了这场比赛的胜利，我已经给game object添加好了一个属性脚winner，你可以直接调用“game.winner”就可以得到胜者。
+    现在用
+    print("{}".format(game.winner))
+    这一行代码是可以直接出winner是谁的。
+    """
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode(size)
