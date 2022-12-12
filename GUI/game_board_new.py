@@ -128,7 +128,8 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             # 如果游戏结束了，让当前玩家移动到格子100
             self.imag_movement(game.current_player.No, game.current_player.current_position)
             # 游戏结束界面
-            print("game is end")
+            print("game is end! player {} has win the game".format(game.current_player.name))
+            game.winner = "{}".format(game.current_player.name)
             self.master.destroy()
 
     def image_resize(self, path, width, height):
@@ -230,24 +231,24 @@ class snakeAndLadder_game_board_new(ttk.Frame):
         text_p3_step = ttk.Label(self, text=game.players[2].current_position, bootstyle="dark")
         text_p4_step = ttk.Label(self, text=game.players[3].current_position, bootstyle="dark")
 
-        self.scoreboard_canvas.create_window(10, 0, window=text_Player)
-        self.scoreboard_canvas.create_window(80, 0, window=text_Color)
-        self.scoreboard_canvas.create_window(150, 0, window=text_Step)
+        self.scoreboard_canvas.create_window(30, 0, window=text_Player)
+        self.scoreboard_canvas.create_window(120, 0, window=text_Color)
+        self.scoreboard_canvas.create_window(190, 0, window=text_Step)
 
-        self.scoreboard_canvas.create_window(10, 30, window=text_player1)
-        self.scoreboard_canvas.create_window(10, 60, window=text_player2)
-        self.scoreboard_canvas.create_window(10, 90, window=text_player3)
-        self.scoreboard_canvas.create_window(10, 120, window=text_player4)
+        self.scoreboard_canvas.create_window(30, 30, window=text_player1)
+        self.scoreboard_canvas.create_window(30, 60, window=text_player2)
+        self.scoreboard_canvas.create_window(30, 90, window=text_player3)
+        self.scoreboard_canvas.create_window(30, 120, window=text_player4)
 
-        self.p1 = self.scoreboard_canvas.create_image(80, 30, image=self.p1_I)
-        self.p2 = self.scoreboard_canvas.create_image(80, 60, image=self.p2_I)
-        self.p3 = self.scoreboard_canvas.create_image(80, 90, image=self.p3_I)
-        self.p4 = self.scoreboard_canvas.create_image(80, 120, image=self.p4_I)
+        self.p1 = self.scoreboard_canvas.create_image(120, 30, image=self.p1_I)
+        self.p2 = self.scoreboard_canvas.create_image(120, 60, image=self.p2_I)
+        self.p3 = self.scoreboard_canvas.create_image(120, 90, image=self.p3_I)
+        self.p4 = self.scoreboard_canvas.create_image(120, 120, image=self.p4_I)
 
-        self.p1_step = self.scoreboard_canvas.create_window(150, 30, window=text_p1_step)
-        self.p2_step = self.scoreboard_canvas.create_window(150, 60, window=text_p2_step)
-        self.p3_step = self.scoreboard_canvas.create_window(150, 90, window=text_p3_step)
-        self.p4_step = self.scoreboard_canvas.create_window(150, 120, window=text_p4_step)
+        self.p1_step = self.scoreboard_canvas.create_window(190, 30, window=text_p1_step)
+        self.p2_step = self.scoreboard_canvas.create_window(190, 60, window=text_p2_step)
+        self.p3_step = self.scoreboard_canvas.create_window(190, 90, window=text_p3_step)
+        self.p4_step = self.scoreboard_canvas.create_window(190, 120, window=text_p4_step)
 
         # 创建初始模块
         self.p1 = self.bg_canvas.create_image(-60, -60, image=self.p1_I)
@@ -303,7 +304,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             self.p1 = self.bg_canvas.create_image(x_r, y_r, image=self.p1_I)
             self.scoreboard_canvas.delete(self.p1_step)
             text_p1_step = ttk.Label(self, text=game.players[0].current_position, bootstyle="dark")
-            self.p1_step = self.scoreboard_canvas.create_window(140, 30, window=text_p1_step)
+            self.p1_step = self.scoreboard_canvas.create_window(190, 30, window=text_p1_step)
 
         if player_no == 2:
             self.start_area_canvas.delete(self.p2_set)
@@ -316,7 +317,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             self.p2 = self.bg_canvas.create_image(x_g, y_g, image=self.p2_I)
             self.scoreboard_canvas.delete(self.p2_step)
             text_p2_step = ttk.Label(self, text=game.players[1].current_position, bootstyle="dark")
-            self.p2_step = self.scoreboard_canvas.create_window(140, 60, window=text_p2_step)
+            self.p2_step = self.scoreboard_canvas.create_window(190, 60, window=text_p2_step)
 
         if player_no == 3:
             self.start_area_canvas.delete(self.p3_set)
@@ -329,7 +330,7 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             self.p3 = self.bg_canvas.create_image(x_b, y_b, image=self.p3_I)
             self.scoreboard_canvas.delete(self.p3_step)
             text_p3_step = ttk.Label(self, text=game.players[2].current_position, bootstyle="dark")
-            self.p3_step = self.scoreboard_canvas.create_window(140, 90, window=text_p3_step)
+            self.p3_step = self.scoreboard_canvas.create_window(190, 90, window=text_p3_step)
 
         if player_no == 4:
             self.start_area_canvas.delete(self.p4_set)
@@ -342,4 +343,4 @@ class snakeAndLadder_game_board_new(ttk.Frame):
             self.p4 = self.bg_canvas.create_image(x_y, y_y, image=self.p4_I)
             self.scoreboard_canvas.delete(self.p4_step)
             text_p4_step = ttk.Label(self, text=game.players[3].current_position, bootstyle="dark")
-            self.p4_step = self.scoreboard_canvas.create_window(140, 120, window=text_p4_step)
+            self.p4_step = self.scoreboard_canvas.create_window(190, 120, window=text_p4_step)

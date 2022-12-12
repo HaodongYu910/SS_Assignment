@@ -130,7 +130,7 @@ class game_start_alart(ttk.Frame):
         super().__init__(master, padding=(20, 10))
         self.pack(fill=BOTH, expand=YES)
         hdr_txt = "Game will be start!!!!"
-        hdr = ttk.Label(master=self, text=hdr_txt, width=50, style="danger", font=('Helvetica', 50))
+        hdr = ttk.Label(master=self, text=hdr_txt, width=50, style="danger", font=('Helvetica', 40))
         hdr.pack(padx=150, pady=30)
         self.create_buttonbox()
 
